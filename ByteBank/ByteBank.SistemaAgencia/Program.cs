@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ByteBank.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,57 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
+            // TestArrayInt();
+            TestArrayContaCorrente();
+
+            Console.ReadLine();
+        }
+
+        public static void TestArrayContaCorrente()
+        {
+            ContaCorrente[] contas = new ContaCorrente[] {
+                 new ContaCorrente(874, 5679787),
+                 new ContaCorrente(874, 4479787),
+                 new ContaCorrente(874, 7789787)
+            };
+
+
+
+            for (int indice = 0; indice < contas.Length; indice++)
+            {
+                ContaCorrente contaAtual = contas[indice];
+                Console.WriteLine($"Conta {indice} {contaAtual.Numero}");
+            }
+        }
+
+        public static void TestArrayInt()
+        {
             // ARRAY de inteiros, com 5 posições!
             int[] idades = new int[5];
 
-           
-            Console.ReadLine();
+            idades[0] = 15;
+            idades[1] = 28;
+            idades[2] = 35;
+            idades[3] = 50;
+            idades[4] = 28;
+
+            int acumulador = 0;
+            for (int indice = 0; indice < idades.Length; indice++)
+            {
+                int idade = idades[indice];
+
+                Console.WriteLine($"Acessando o array idades no índice {indice}");
+                Console.WriteLine($"Valor de idades[{indice}] = {idade}");
+
+                acumulador += idade;
+            }
+
+            int media = acumulador / idades.Length;
+
+            Console.WriteLine("");
+
+            Console.WriteLine("Média " + media);
+
         }
     }
 }
