@@ -13,7 +13,7 @@ namespace ByteBank.SistemaAgencia
         {
             // TestArrayInt();
             // TestArrayContaCorrente();
-            //TestListaDeContaCorrente();
+            TestListaDeContaCorrente();
 
             Console.ReadLine();
         }
@@ -21,7 +21,11 @@ namespace ByteBank.SistemaAgencia
         public static void TestListaDeContaCorrente()
         {
             ListaDeContaCorrente lista = new ListaDeContaCorrente();
-            
+
+            ContaCorrente contaDoGui = new ContaCorrente(111, 111111111);
+
+            lista.Adicionar(contaDoGui);
+
             lista.Adicionar(new ContaCorrente(874, 5679787));
             lista.Adicionar(new ContaCorrente(874, 5679787));
             lista.Adicionar(new ContaCorrente(874, 5679787));
@@ -31,6 +35,13 @@ namespace ByteBank.SistemaAgencia
             lista.Adicionar(new ContaCorrente(874, 5679787));
             lista.Adicionar(new ContaCorrente(874, 5679787));
             lista.Adicionar(new ContaCorrente(874, 5679787));
+
+
+            lista.EscreverListaNaTela();
+
+            lista.Remover(contaDoGui);
+
+            lista.EscreverListaNaTela();
         }
 
         public static void TestArrayContaCorrente()

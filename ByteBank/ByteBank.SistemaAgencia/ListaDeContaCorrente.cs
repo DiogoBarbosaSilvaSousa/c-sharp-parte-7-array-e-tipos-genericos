@@ -11,7 +11,7 @@ namespace ByteBank.SistemaAgencia
     {
         private ContaCorrente[] _itens;
         private int _proximaPosicao;
-        
+
         /// <summary>
         /// Cria lista de contas correntes
         /// </summary>
@@ -32,16 +32,44 @@ namespace ByteBank.SistemaAgencia
             _proximaPosicao++;
         }
 
+        public void Remover(ContaCorrente item)
+        {
+            int indiceItem = -1;
+            ContaCorrente itemAtual = null;
+
+            for (int i = 0; i < _proximaPosicao; i++)
+            {
+                itemAtual = _itens[i];
+                if (itemAtual.Equals(item))
+                {
+                    indiceItem = i;
+                    break;
+                }
+            }
+            
+
+            for (int i = indiceItem; i < _proximaPosicao - 1; i++)
+            {
+                _itens[i] = _itens[i + 1];
+            }
+
+            _proximaPosicao--;
+            _itens[_proximaPosicao] = null;
+
+            Console.WriteLine($"Removendo conta no índice {indiceItem}: Agência {itemAtual.Agencia} Número {itemAtual.Numero}");
+            Console.WriteLine("");
+        }
+
         private void VerificarCapacidade(int tamanhoNecessario)
         {
-            if(_itens.Length >= tamanhoNecessario)
+            if (_itens.Length >= tamanhoNecessario)
             {
                 return;
             }
 
             int novoTamanho = _itens.Length * 2;
 
-            if(novoTamanho < tamanhoNecessario)
+            if (novoTamanho < tamanhoNecessario)
             {
                 novoTamanho = tamanhoNecessario;
             }
@@ -50,14 +78,25 @@ namespace ByteBank.SistemaAgencia
 
             ContaCorrente[] novoArray = new ContaCorrente[novoTamanho];
 
-            for(int indice = 0; indice < _itens.Length; indice++)
+            for (int indice = 0; indice < _itens.Length; indice++)
             {
                 novoArray[indice] = _itens[indice];
                 Console.WriteLine(".");
             }
 
             _itens = novoArray;
-                
+
+        }
+
+        public void EscreverListaNaTela()
+        {
+            for (int i = 0; i < _proximaPosicao; i++)
+            {
+                ContaCorrente conta = _itens[i];
+                Console.WriteLine($"Conta no índice {i}: numero {conta.Agencia} {conta.Numero}");
+            }
+
+            Console.WriteLine("");
         }
     }
 }
