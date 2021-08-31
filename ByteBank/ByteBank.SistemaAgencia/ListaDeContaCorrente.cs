@@ -12,6 +12,8 @@ namespace ByteBank.SistemaAgencia
         private ContaCorrente[] _itens;
         private int _proximaPosicao;
 
+        public int Tamanho { get { return _proximaPosicao; } }
+
         /// <summary>
         /// Cria lista de contas correntes
         /// </summary>
@@ -30,6 +32,14 @@ namespace ByteBank.SistemaAgencia
             _itens[_proximaPosicao] = item;
 
             _proximaPosicao++;
+        }
+
+        public void AdicionarVarios(params ContaCorrente[] itens)
+        {
+            foreach (ContaCorrente conta in itens)
+            {
+                Adicionar(conta);
+            }
         }
 
         public void Remover(ContaCorrente item)
@@ -58,6 +68,16 @@ namespace ByteBank.SistemaAgencia
 
             Console.WriteLine($"Removendo conta no índice {indiceItem}: Agência {itemAtual.Agencia} Número {itemAtual.Numero}");
             Console.WriteLine("");
+        }
+
+        public ContaCorrente GetItemNoIndice(int indice)
+        {
+            if(indice < 0 || indice >= _proximaPosicao)
+            {
+                throw new ArgumentOutOfRangeException(nameof(indice));
+            }
+
+            return _itens[indice];
         }
 
         private void VerificarCapacidade(int tamanhoNecessario)
@@ -97,6 +117,15 @@ namespace ByteBank.SistemaAgencia
             }
 
             Console.WriteLine("");
+        }
+
+
+        public ContaCorrente this[int indice]
+        {
+            get
+            {
+                return GetItemNoIndice(indice);
+            }
         }
     }
 }
